@@ -3,13 +3,9 @@
 #include <map>
 using namespace std;
 BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
-  if(value < lowerLimit) {
-    return TOO_LOW;
-  }
-  if(value > upperLimit) {
-    return TOO_HIGH;
-  }
-  return NORMAL;
+    return (value < lowerLimit) ? TOO_LOW : 
+         (value > upperLimit) ? TOO_HIGH : 
+         NORMAL;
 }
 
 
@@ -18,12 +14,12 @@ BreachType classifyTemperatureBreach(
     CoolingType coolingType, double temperatureInC) {
   int lowerLimit = 0;
 
-  map<CoolingType,int> upperLimitMap={
+  map<CoolingType,int> upperLimits={
     {PASSIVE_COOLING,35},
     {HI_ACTIVE_COOLING,45},
     {MED_ACTIVE_COOLING,40}
   };
-  int upperLimit=upperLimitMap[coolingType];
+  int upperLimit=upperLimits[coolingType];
 
   return inferBreach(temperatureInC, lowerLimit, upperLimit);
 }
@@ -55,17 +51,6 @@ void sendToEmail(BreachType breachType) {
     {TOO_HIGH,"Hi, the temperature is too high\n"},
     {NORMAL,""}
   };
-  // switch(breachType) {
-  //   case TOO_LOW:
-  //     printf("To: %s\n", recepient);
-  //     printf("Hi, the temperature is too low\n");
-  //     break;
-  //   case TOO_HIGH:
-  //     printf("Hi, the temperature is too high\n");
-  //     break;
-  //   case NORMAL:
-  //     break;
-  // }
   printf("To: %s\n", recepient);
   printf(breachMessage[breachType])
 }
