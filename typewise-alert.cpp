@@ -29,20 +29,18 @@ BreachType classifyTemperatureBreach(
 }
 
 void checkAndAlert(
-    AlertTarget alertTarget, EquipmentCharacter characteristic, double temperatureInC) {
+  AlertTarget alertTarget, EquipmentCharacter characteristic, double temperatureInC) {
 
   BreachType breachType = classifyTemperatureBreach(
     characteristic.coolingType, temperatureInC
   );
 
-  switch(alertTarget) {
-    case TO_CONTROLLER:
-      sendToController(breachType);
-      break;
-    case TO_EMAIL:
-      sendToEmail(breachType);
-      break;
-  }
+  map<AlertTarget, void(*)(BreachType)> alertFunctions = {
+    {TO_CONTROLLER, sendToController},
+    {TO_EMAIL, sendToEmail}
+  };
+  
+  alertFunctions[alertTarget];
 }
 
 void sendToController(BreachType breachType) {
