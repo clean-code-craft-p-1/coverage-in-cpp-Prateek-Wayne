@@ -1,6 +1,6 @@
 #include "typewise-alert.h"
 #include <stdio.h>
-
+#include <map>
 BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
   if(value < lowerLimit) {
     return TOO_LOW;
@@ -11,24 +11,32 @@ BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
   return NORMAL;
 }
 
+
+
 BreachType classifyTemperatureBreach(
     CoolingType coolingType, double temperatureInC) {
   int lowerLimit = 0;
-  int upperLimit = 0;
-  switch(coolingType) {
-    case PASSIVE_COOLING:
-      lowerLimit = 0;
-      upperLimit = 35;
-      break;
-    case HI_ACTIVE_COOLING:
-      lowerLimit = 0;
-      upperLimit = 45;
-      break;
-    case MED_ACTIVE_COOLING:
-      lowerLimit = 0;
-      upperLimit = 40;
-      break;
-  }
+  // int upperLimit = 0;
+  map<CoolingType,int> upperLimitMap={
+    {PASSIVE_COOLING,35},
+    {HI_ACTIVE_COOLING,45},
+    {MED_ACTIVE_COOLING,40}
+  };
+  int upperLimit=upperLimitMap[coolingType];
+  // switch(coolingType) {
+  //   case PASSIVE_COOLING:
+  //     lowerLimit = 0;
+  //     upperLimit = 35;
+  //     break;
+  //   case HI_ACTIVE_COOLING:
+  //     lowerLimit = 0;
+  //     upperLimit = 45;
+  //     break;
+  //   case MED_ACTIVE_COOLING:
+  //     lowerLimit = 0;
+  //     upperLimit = 40;
+  //     break;
+  // }
   return inferBreach(temperatureInC, lowerLimit, upperLimit);
 }
 
