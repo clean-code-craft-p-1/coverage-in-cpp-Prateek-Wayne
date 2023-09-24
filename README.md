@@ -47,4 +47,7 @@ You have seen a few workflows in this repository. They are quality-gates to prev
 **yes**
 
 During the next four weeks, what improvement do you plan in your code-quality practice? (in your regular work, not in this repository!)
-**_enter the practice here**
+** 
+I focus on improving the readability and maintainability of my code,
+I follow  the practices  that I learned during this training
+ **
