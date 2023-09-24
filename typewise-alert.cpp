@@ -53,5 +53,5 @@ void sendToEmail(BreachType breachType) {
     {NORMAL,""}
   };
   printf("To: %s\n", recepient);
-  printf(breachMessage[breachType])
+  cout<<breachMessage[breachType];
 }
