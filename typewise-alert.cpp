@@ -1,6 +1,7 @@
 #include "typewise-alert.h"
 #include <stdio.h>
 #include <map>
+#include <string>
 using namespace std;
 BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
     return (value < lowerLimit) ? TOO_LOW : 
@@ -36,7 +37,7 @@ void checkAndAlert(
     {TO_EMAIL, sendToEmail}
   };
   
-  alertFunctions[alertTarget];
+  alertFunctions[alertTarget](breachType);
 }
 
 void sendToController(BreachType breachType) {
