@@ -47,7 +47,7 @@ void sendToController(BreachType breachType) {
 
 void sendToEmail(BreachType breachType) {
   const char* recepient = "a.b@c.com";
-  map<BreachType,string> = breachMessage{
+  map<BreachType,string> breachMessage={
     {TOO_LOW,"Hi, the temperature is too low\n"},
     {TOO_HIGH,"Hi, the temperature is too high\n"},
     {NORMAL,""}
